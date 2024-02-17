@@ -6,8 +6,8 @@ using UnityEngine;
 public class Jump : MonoBehaviour
 {
     Rigidbody2D playerRb;
-    [SerializeField] float jumpForce, fallForce;
-    [SerializeField] bool isGrounded;
+    [SerializeField] float jumpForce, fallForce, jumpLimit, jumpTime, jumpCount;
+    [SerializeField] bool isGrounded, isJumping;
     Vector2 gravity;
 
     private void Start()
@@ -21,11 +21,29 @@ public class Jump : MonoBehaviour
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             playerRb.velocity = new Vector2(playerRb.velocity.x, jumpForce);
+            isJumping = true;
+            jumpCount = 0;
         }
 
         if (playerRb.velocity.y < 0)
         {
             playerRb.velocity -= gravity * fallForce * Time.deltaTime;
+        }
+        
+        if (playerRb.velocity.y > 0 && isJumping)
+        {
+            jumpCount += Time.deltaTime;
+            if (jumpCount > jumpTime)
+            {
+                isJumping = false;
+            }
+
+            playerRb.velocity += gravity * jumpLimit * Time.deltaTime;
+        }
+
+        if (Input.GetButtonUp("Jump"))
+        {
+            isJumping = false;
         }
     }
 
