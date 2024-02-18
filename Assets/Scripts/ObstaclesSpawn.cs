@@ -5,12 +5,18 @@ using UnityEngine;
 public class ObstaclesSpawn : MonoBehaviour
 {
     [SerializeField] public List<GameObject> obstacles = new List<GameObject>();
+    Score score;
     public Transform spawnPoint;
-    public float timer;
+    public float timer, spikeCount;
+
+    private void Start()
+    {
+        score = FindObjectOfType<Score>();
+    }
 
     void SpawnObstacles()
     {
-        if(timer >= 3)
+        if(timer >= spikeCount)
         {
             int randomObstacle = Random.Range(0, obstacles.Count);
             Instantiate(obstacles[randomObstacle], spawnPoint.position, Quaternion.identity);
@@ -18,10 +24,20 @@ public class ObstaclesSpawn : MonoBehaviour
         }
     }
 
+    void IncreaseSpikeRate()
+    {
+        if(score.scoreCount >= 500)
+            spikeCount = 2;
+
+        if(score.scoreCount >= 1000)
+            spikeCount = 1.5f;
+    }
+
     private void Update()
     {
         timer += Time.deltaTime;
 
         SpawnObstacles();
+        IncreaseSpikeRate();
     }
 }

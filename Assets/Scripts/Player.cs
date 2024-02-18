@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : GameManager
 {
     private void OnCollisionEnter2D(Collision2D other)
     {
@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
         {
             Debug.Log("Game over");
             Time.timeScale = 0f;
+            gameOverPanel.SetActive(true); 
         }
     }
 }

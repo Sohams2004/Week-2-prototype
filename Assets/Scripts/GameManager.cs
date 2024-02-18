@@ -4,15 +4,37 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] GameObject gamePausePanel;
+    [SerializeField] public GameObject gameOverPanel;
+
+    private void Start()
     {
-        
+        Time.timeScale = 1.0f;
     }
 
-    // Update is called once per frame
-    void Update()
+    void PauseGame()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Time.timeScale = 0f;
+            gamePausePanel.SetActive(true);
+        }
+
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            Time.timeScale = 1f;
+            gamePausePanel.SetActive(false);
+        }
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1f;
+        gamePausePanel.SetActive(false);
+    }
+
+    private void Update()
+    {
+        PauseGame();
     }
 }

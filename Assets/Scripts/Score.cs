@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Score : MonoBehaviour
 {
-    [SerializeField] float scoreCount;
+    [SerializeField] public float scoreCount;
     [SerializeField] TextMeshProUGUI scoreText ;
 
     void ScoreIncrease()
