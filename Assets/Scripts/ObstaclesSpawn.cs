@@ -5,7 +5,7 @@ using UnityEngine;
 public class ObstaclesSpawn : MonoBehaviour
 {
     [SerializeField] public List<GameObject> obstacles = new List<GameObject>();
-    Score score;
+    [SerializeField] Score score;
     public Transform spawnPoint;
     public float timer, spikeCount;
 

@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StartUpScreen : MonoBehaviour
 {
@@ -13,5 +12,20 @@ public class StartUpScreen : MonoBehaviour
         highScore = PlayerPrefs.GetFloat("HighScore");
         highScoreText.text = "High Score : " + Mathf.Round(highScore);
         Debug.Log(highScore);
+        Time.timeScale = 1.0f;
+    }
+
+    void Play()
+    {
+        if(Input.GetMouseButtonDown(0))
+        {
+            Scene scene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(scene.buildIndex + 1) ;
+        }
+    }
+
+    private void Update()
+    {
+        Play();
     }
 }
