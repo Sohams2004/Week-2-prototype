@@ -17,15 +17,24 @@ public class StartUpScreen : MonoBehaviour
 
     void Play()
     {
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
             Scene scene = SceneManager.GetActiveScene();
-            SceneManager.LoadScene(scene.buildIndex + 1) ;
+            SceneManager.LoadScene(scene.buildIndex + 1);
+        }
+    }
+
+    void QuitGame()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
         }
     }
 
     private void Update()
     {
         Play();
+        QuitGame();
     }
 }
